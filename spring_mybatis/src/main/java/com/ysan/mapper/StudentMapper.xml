@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ysan.mapper.StudentMapper">
+    <select id="findAll" resultType="com.ysan.pojo.Student">
+        SELECT * FROM t_student;
+    </select>
+
+<!--    <insert id="insert" parameterType="com.ysan.pojo.Student" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_student (name,score,age,gender) VALUES (#{name},#{score},#{age},#{gender});
+    </insert>-->
+
+    <insert id="insert" parameterType="com.ysan.pojo.Student">
+        INSERT INTO t_student (name,score,age,gender) VALUES (#{name},#{score},#{age},#{gender});
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM t_student WHERE id = #{id};
+    </delete>
+
+    <select id="findByName" parameterType="string" resultType="student">
+        SELECT * FROM t_student name like '%${value}%'
+    </select>
+
+    <select id="batchFind" resultType="student" parameterType="java.util.List">
+        SELECT * FROM t_student
+        <where>
+            <if test="list != null and list.size() > 0">
+                AND id in
+                <foreach collection="list" item="id" open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>

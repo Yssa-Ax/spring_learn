@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 配置自动扫包 -->
+    <context:component-scan base-package="com.ysan.controller"></context:component-scan>
+    <context:component-scan base-package="com.ysan.repository"></context:component-scan>
+
+    <!-- 视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--给逻辑视图加上前缀和后缀 -->
+        <!--前缀-->
+        <property name="prefix" value="/"></property>
+        <!--后缀-->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+<!--文件上传 为了把二进制数据解析成对象-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.ysan.converter.DateConverter">
+                    <constructor-arg type="java.lang.String" value="yyyy-MM-dd"></constructor-arg>
+                </bean>
+                <bean class="com.ysan.converter.StudentConverter"></bean>
+            </list>
+        </property>
+    </bean>
+
+    <!--    消息转换器-->
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"></property>
+            </bean>
+            <!--            fastjson-->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"></bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+<!--    <mvc:interceptors>
+&lt;!&ndash;        拦截器配置&ndash;&gt;
+&lt;!&ndash;        使用bean定义一个Interceptor
+            直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求
+&ndash;&gt;
+        <bean class="com.ysan.interceptor.MyInterceptor"></bean>
+    </mvc:interceptors>-->
+
+<!--    拦截器配置2-->
+    <mvc:interceptors>
+<!--        定义在mvc:interceptor夏敏，可以自定义需要拦截的请求，如果有多个拦截器满足拦截处理的要求，则依据配置的先后顺序来执行-->
+        <mvc:interceptor>
+<!--            通过mvc:mapping 配置需要拦截的资源，支持通配符，可以配置多个-->
+            <mvc:mapping path="/**"/> <!-- /** 表示拦截所有的请求-->
+<!--            通过mvc:exclude-mapping 配置不需要拦截的资源。支持通配符，可以配置多个-->
+            <mvc:exclude-mapping path="/hello/*"/> <!-- /hello/* 表示放行hello路径下的请求-->
+            <bean class="com.ysan.interceptor.MyInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+<!--    <mvc:interceptors>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/**"/>-->
+<!--            <bean class="com.ysan.interceptor.MyInterceptor"></bean>-->
+<!--        </mvc:interceptor>-->
+<!--        <mvc:interceptor>-->
+<!--            <mvc:mapping path="/**"/>-->
+<!--            <bean class="com.ysan.interceptor.MyInterceptor2"></bean>-->
+<!--        </mvc:interceptor>-->
+<!--    </mvc:interceptors>-->
+
+
+</beans>
