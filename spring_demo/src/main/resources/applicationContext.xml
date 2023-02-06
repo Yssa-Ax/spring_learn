@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    <bean id="stu" class="com.ysan.entity.Student">
+        <property name="name" value="张三"></property>
+        <property name="age" value="26"></property>
+        <property name="id" value="1"></property>
+        <property name="address" ref="address"></property>
+        <property name="classes" ref="classes"></property>
+    </bean>
+
+    <bean id="stu1" class="com.ysan.entity.Student">
+        <constructor-arg name="id" value="1"></constructor-arg>
+        <constructor-arg name="name" value="李四"></constructor-arg>
+    </bean>
+
+    <bean id="stu2" class="com.ysan.entity.Student">
+        <constructor-arg index="0" value="1"></constructor-arg>
+        <constructor-arg index="1" value="王五"></constructor-arg>
+    </bean>
+
+    <bean id="address" class="com.ysan.entity.Address">
+        <property name="id" value="1"></property>
+        <property name="name" value="山窝窝"></property>
+    </bean>
+
+
+    <bean id="classes" class="com.ysan.entity.Classes">
+        <property name="id" value="1"></property>
+        <property name="name">
+            <value><![CDATA[<一班>]]></value>
+        </property>
+    </bean>
+
+
+
+    <bean id="classes1" class="com.ysan.entity.Classes">
+        <property name="name" value="1班"></property>
+        <property name="id" value="1"></property>
+        <property name="studentList">
+            <list>
+                <ref bean="student"></ref>
+                <ref bean="student2"></ref>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="student" class="com.ysan.entity.Student">
+        <property name="id" value="100"></property>
+        <property name="name" value="张三"></property>
+        <property name="age" value="22"></property>
+        <property name="classes" ref="classes1"></property>
+    </bean>
+    <bean id="student2" class="com.ysan.entity.Student">
+        <property name="id" value="200"></property>
+        <property name="age" value="18"></property>
+        <property name="name" value="李四"></property>
+        <property name="classes" ref="classes1"></property>
+    </bean>-->
+
+<!--
+    <bean id="user" class="com.ysan.entity.User" scope="prototype" depends-on="address">
+        <property name="id" value="1"></property>
+        <property name="name" value="张三"></property>
+    </bean>
+
+    <bean id="address" class="com.ysan.entity.Address">
+        <property name="id" value="1"></property>
+        <property name="name" value="山窝窝"></property>
+    </bean>-->
+
+<!--    xmlns:p="http://www.springframework.org/schema/p"-->
+    <bean id="stu" class="com.ysan.entity.Student" p:id="1" p:age="10" p:name="张三" p:classes-ref="classes"></bean>
+
+    <bean id="classes" class="com.ysan.entity.Classes" p:name="一班" p:id="1"></bean>
+
+
+</beans>
