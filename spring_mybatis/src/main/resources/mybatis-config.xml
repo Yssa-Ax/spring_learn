@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 配置文件信息 -->
+<!--    一般将数据源的信息单独放在一个properties文件中， 然后用这个标签引入，在下面environment标签中，就能用${}占位符快速获取数据源信息-->
+    <properties resource="properties/jdbc.properties"></properties>
+
+<!--    用来开启或关闭mybatis的一些特性-->
+<!--    <settings>-->
+<!--        <setting name="" value=""/>-->
+<!--    </settings>-->
+
+<!--    在mapper.xml中需要使用parameterType和resultType属性来配置SQL语句的输入参数类型和输出参数类型，类必须要写上全限定名
+        可以一次性给某个包下面的所有类设置别名
+-->
+    <typeAliases>
+        <typeAlias type="com.ysan.pojo.Student" alias="student"/>
+        <package name="com.ysan.pojo"/>
+    </typeAliases>
+
+<!--    可以用来配置mybatis的插件，比如在开发中经常需要对查询结果进行分页，就需要用pageHelper分页插件，这些插件就是通过标签进行配置。
+        在mybatis底层，运行了责任链模式 + 动态代理取实现插件的功能
+-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
+<!--    用来配置数据源-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!-- 从配置文件中加载属性 -->
+                <property name="driver" value="${db.driver}"/>
+                <property name="url" value="${db.url}"/>
+                <property name="username" value="${db.user}"/>
+                <property name="password" value="${db.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--    用来配置mapper.xml映射文件，这些xml文件里都是SQL语句-->
+    <mappers>
+        <!-- 加载前面编写的SQL语句的文件 -->
+<!--        <mapper resource="com/ysan/mapper/StudentMapper.xml"/>-->
+<!--        <mapper class="com.ysan.mapper.PureStudentMapper"/>-->
+        <package name="com.ysan.mapper"/>
+    </mappers>
+
+</configuration>
