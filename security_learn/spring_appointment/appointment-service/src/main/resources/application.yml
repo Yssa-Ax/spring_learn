@@ -1,0 +1,30 @@
+server:
+  port: 8083
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:8761/eureka/
+
+
+
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.tianyalan: INFO
+
+spring:
+  application:
+    name: appointmentservice
+  security:
+    oauth2:
+      resource:
+        userInfoUri: http://localhost:8080/userinfo
+    user:
+      name: ysan
+      password: pwd123

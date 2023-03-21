@@ -1,0 +1,30 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: configservice
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: classpath:config/,classpath:config/doctorservice,classpath:config/cardservice,classpath:config/appointmentservice
+      name: ysan
+      password: pwd123
+
+
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.appointment: INFO
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://ysan:pwd123@localhost:8761/eureka/

@@ -1,0 +1,12 @@
+spring:
+  security:
+    user:
+      name: spring
+      password: spring_password
+  mvc:
+    view:
+      suffix: .html
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

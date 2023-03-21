@@ -1,0 +1,12 @@
+appointment:
+  remark: "test_remark"
+
+spring:
+  jpa:
+    database: MYSQL
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://49.235.108.159:3306/appointment-appointment
+    username: root
+    password: Dy490930
+    driver-class-name: com.mysql.jdbc.Driver
