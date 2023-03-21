@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: redisson-example
+  redis:
+    host: 49.235.108.159
+    port: 6379
+  datasource:
+    url: jdbc:mysql://49.235.108.159:3306/redisson_test?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: Dy490930
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
