@@ -8,6 +8,8 @@ package com.ysan.entity;
 public class User {
     private Integer id;
     private String name;
+    private String email;
+
 
     public User() {
         System.out.println("无参构造函数创建-User");
@@ -26,6 +28,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

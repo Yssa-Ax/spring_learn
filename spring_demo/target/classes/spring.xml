@@ -7,7 +7,8 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd
-http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 <!--&lt;!&ndash;    实例工厂类&ndash;&gt;-->
 <!--    <bean id="instanceCarFactory" class="com.ysan.factory.InstanceCarFactory"></bean>-->

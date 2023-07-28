@@ -7,6 +7,7 @@ import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
@@ -106,6 +107,7 @@ public class JWTUtils {
      */
     public static DecodedJWT decodeRsa(String token){
         // 利用hutool 创建RSA
+
         RSA rsa = new RSA(null, RSA_PUBLIC_KEY);
         //获取RSA公钥
         RSAPublicKey publicKey = (RSAPublicKey) rsa.getPublicKey();
